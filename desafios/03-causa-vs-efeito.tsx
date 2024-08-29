@@ -2,47 +2,47 @@
 import { useEffect, useState } from "react"
 
 interface User {
-  name: string;
-  github: string;
+  userName: string;
+  userLinkOnGithub: string;
 }
 
 function fetchUser() {
   return {
-    data: {
+    userData: {
       user: {
-        name: 'Joseph Oliveira',
-        github: 'https://github.com/josepholiveira'
+        userName: 'Joseph Oliveira',
+        userLinkOnGithub: 'https://github.com/josepholiveira'
       }
     }
   }
 }
 
 export function UserProfile() {
-  const [shouldNotRenderUserName, setShouldNotRenderUserName] = useState(false)
+  const [isUserNotLoaded, setUserNotLoaded] = useState(false)
   const [userData, setUserData] = useState<User>()
 
   useEffect(() => {
     function loadUser() {
-      setShouldNotRenderUserName(true)
+      setUserNotLoaded(true)
 
       const fetchUserResponse = fetchUser()
 
-      setUserData(fetchUserResponse.data.user)
+      setUserData(fetchUserResponse.userData.user)
       
-      setShouldNotRenderUserName(false)
+      setUserNotLoaded(false)
     }
 
     loadUser()
   })
 
-  if (shouldNotRenderUserName) {
+  if (isUserNotLoaded) {
     return <p>Loading...</p>
   }
 
   return (
     <div>
-      <img src={`${userData?.github}.png`} alt="" />
-      <a href={userData?.github}>{userData?.name}</a>
+      <img src={`${userData?.userLinkOnGithub}.png`} alt="" />
+      <a href={userData?.userLinkOnGithub}>{userData?.userName}</a>
     </div>
   )
 }
