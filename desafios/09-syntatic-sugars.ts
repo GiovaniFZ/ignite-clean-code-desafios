@@ -1,5 +1,5 @@
 function getFirstFiveRatings(ratings) {
-  return ratings.length >= 5 && ratings.slice(0, 5):null
+  return ratings.length >= 5 && ratings.slice(0, 5)
 }
 
 function sumFirstFiveRatings(ratings?: string[]) {
